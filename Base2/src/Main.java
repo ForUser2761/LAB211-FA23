@@ -51,4 +51,55 @@ public class Main {
             }
         }
     }
+    
+    
+    public static double getDouble(String message, String error, double min, double max) {
+        Scanner scanner = new Scanner(System.in);
+
+        //- Yêu cầu người dùng nhập vào một số nguyên
+        while (true) {
+            try {
+                System.out.print(message);
+                String input = scanner.nextLine();
+                if (input.isEmpty()) {
+                    System.err.println("KhÔng được để trống");
+                } else {
+                    double number = Double.parseDouble(input);
+                    //check number in range
+                    if (number >= min && number <= max) {
+                        return number;
+                    } else {
+                        System.err.println("Bạn phải nhập trong khoảng " + min + "-" + max);
+                    }
+                }
+            } catch (Exception e) {
+                System.err.println(error);
+            }
+        }
+    }
+    
+    public static float getFloat(String message, String error, float min, float max) {
+        Scanner scanner = new Scanner(System.in);
+
+        //- Yêu cầu người dùng nhập vào một số nguyên
+        while (true) {
+            try {
+                System.out.print(message);
+                String input = scanner.nextLine();
+                if (input.isEmpty()) {
+                    System.err.println("KhÔng được để trống");
+                } else {
+                    float number = Float.parseFloat(input);
+                    //check number in range
+                    if (number >= min && number <= max) {
+                        return number;
+                    } else {
+                        System.err.println("Bạn phải nhập trong khoảng " + min + "-" + max);
+                    }
+                }
+            } catch (Exception e) {
+                System.err.println(error);
+            }
+        }
+    }
 }
