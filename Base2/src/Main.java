@@ -19,11 +19,11 @@ public class Main {
         int sotuoi = getInteger("Hãy nhập vào số tuổi: ", "Tuổi phải là số nguyên",
                 10, 30);
         System.out.println(sotuoi);
-        
+
         int soluongSP = getInteger("Hãy nhập vào số lượng sản phẩm: ",
                 "Số lượng sản phẩm phải là số nguyên", 1, 1000);
         System.out.println(soluongSP);
-        
+
     }
 
     // access modifier + (static) +return type + name method
@@ -51,8 +51,7 @@ public class Main {
             }
         }
     }
-    
-    
+
     public static double getDouble(String message, String error, double min, double max) {
         Scanner scanner = new Scanner(System.in);
 
@@ -77,7 +76,7 @@ public class Main {
             }
         }
     }
-    
+
     public static float getFloat(String message, String error, float min, float max) {
         Scanner scanner = new Scanner(System.in);
 
@@ -99,6 +98,28 @@ public class Main {
                 }
             } catch (Exception e) {
                 System.err.println(error);
+            }
+        }
+    }
+
+    public static String getString(String message, String error, String regex) {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+
+            //nhap vao
+            String input = scanner.nextLine();
+            //kiem tra xem input co rong hay khong
+            if (input.isEmpty()) {
+                System.out.println("Input cannot be empty !!");
+            } else {
+                //kiem tra xem input co matches regex hay ko
+                //neu nhu matches voi regex => return string
+                if (input.matches(regex)) {
+                    return input;
+                } else {
+                    //tell error
+                    System.out.println(error);
+                }
             }
         }
     }
