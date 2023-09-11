@@ -4,11 +4,13 @@
 /0001-bubble sort/build/
 /0010-Linear Search/nbproject/private/
 /0010-Linear Search/build/
-/nbproject/private/
-/build/
+./nbproject/private/
+./build/
 /TestCode/nbproject/private/
 /TestCode/build/
 /0102-DayOfWeek/nbproject/private/
 /0102-DayOfWeek/build/
 /0103-CompareDate/nbproject/private/
 /0103-CompareDate/build/
+/0052-Country/nbproject/private/
+/0052-Country/build/
