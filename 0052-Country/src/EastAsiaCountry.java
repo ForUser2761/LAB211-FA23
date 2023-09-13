@@ -29,6 +29,7 @@ public class EastAsiaCountry extends Country{
     @Override
     public void display() {
         super.display(); 
+        System.out.format("%-10s\n", terrain);
     }
     
     

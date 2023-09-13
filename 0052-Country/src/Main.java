@@ -16,23 +16,29 @@ public class Main {
             displayMenu();
             //input option
             int option = Utility.getInteger("Enter option: ", "Option must be"
-                    + " integer", 1, 5);
+                    + " integer", 1, 6);
             switch (option) {
                 case 1:
                     //Input the information of 11 countries in East Asia
                     view.inputCountry();
                     break;
                 case 2:
-
+                    //Display the information of country you've just input
+                    view.displayCountryJustInput();
                     break;
                 case 3:
-
+                    //Search the information of country by user-entered name
+                    view.searchCountriesByName();
                     break;
                 case 4:
-
+                    view.sortCountriesByName();
                     break;
                 case 5:
                     System.exit(0);
+                    break;
+                case 6:
+                    view.display();
+                    break;
             }
 
         }

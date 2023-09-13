@@ -94,7 +94,7 @@ public class Utility {
     public static String getString(String message, String error, String regex) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-
+            System.out.print(message);
             //nhap vao
             String input = scanner.nextLine();
             //kiem tra xem input co rong hay khong

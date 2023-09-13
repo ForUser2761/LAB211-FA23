@@ -46,6 +46,6 @@ public class Country {
     }
     
     public void display() {
-        System.out.println("......");
+        System.out.format("%-10s %-10s %-10s", code, name, area);
     }
 }
