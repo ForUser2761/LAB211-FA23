@@ -4,6 +4,14 @@
  */
 package controller;
 
+import constant.Constant;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -131,9 +139,8 @@ public class Manage {
     /**
      * Tìm kiếm những vehicle có price <= price input @param
      *
-     * price
-     * @param price
-     * @return
+     * price @param price @return
+     *
      */
     public ArrayList<Vehicle> findVehiclesByPrice(double price) {
         ArrayList<Vehicle> list = new ArrayList<>();
@@ -144,10 +151,11 @@ public class Manage {
         }
         return list;
     }
-    
+
     /**
-     * Sort vehicles descending theo price 
-     * @param list 
+     * Sort vehicles descending theo price
+     *
+     * @param list
      */
     public void sortPriceDescending(ArrayList<Vehicle> list) {
         Collections.sort(list, new Comparator<Vehicle>() {
@@ -157,23 +165,29 @@ public class Manage {
             }
         });
     }
-    
+
     /**
-     * tim ra toan bo vehicles co product year lon hon hoac bang voi product year nhap vao 
-     * 
+     * tim ra toan bo vehicles co product year lon hon hoac bang voi product
+     * year nhap vao
+     *
      * @param year
-     * @return 
+     * @return
      */
     public ArrayList<Vehicle> findVehiclesByProductYear(int year) {
         ArrayList<Vehicle> list = new ArrayList<>();
         for (Vehicle vehicle : vehicleList) {
-            if (vehicle.getProductYear()>= year) {
+            if (vehicle.getProductYear() >= year) {
                 list.add(vehicle);
             }
         }
         return list;
     }
 
+    /**
+     * sort year descending
+     *
+     * @param list
+     */
     public void sortYearDescending(ArrayList<Vehicle> list) {
         Collections.sort(list, new Comparator<Vehicle>() {
             @Override
@@ -183,4 +197,52 @@ public class Manage {
         });
     }
 
+    public void saveDataToFile() throws IOException {
+        FileWriter fileWriter = null;
+        BufferedWriter bufferedWriter = null;
+        try {
+            fileWriter = new FileWriter(Constant.FILE_NAME_VEHICLE);
+            bufferedWriter = new BufferedWriter(fileWriter);
+
+            //ghi tung thong tin cua tung vehicle vao ben trong file
+            for (Vehicle vehicle : vehicleList) {
+                bufferedWriter.write(vehicle.toString());
+                bufferedWriter.newLine();
+            }
+
+        } catch (IOException e) {
+            throw new IOException();
+        } finally {
+            try {
+                bufferedWriter.close();
+                fileWriter.close();
+            } catch (IOException ex) {
+                throw new IOException();
+            }
+
+        }
+    }
+
+    public void loadDataFromFile() throws FileNotFoundException, IOException, ParseException {
+        vehicleList.clear();
+        FileReader fileReader = new FileReader(Constant.FILE_NAME_VEHICLE);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            String[] parts = line.split("[|]");
+            String id = parts[0].trim();
+            String name = parts[1].trim();
+            String color = parts[2].trim();
+            double price = Double.parseDouble(parts[3].trim());
+            String brand = parts[4].trim();
+            String type = parts[5].trim();
+            int productYear = Integer.parseInt(parts[6].trim());
+
+            Vehicle vehicle = new Vehicle(id, name, color, price, brand, type, productYear);
+            vehicleList.add(vehicle);
+        }
+        bufferedReader.close();
+        fileReader.close();
+    }
 }

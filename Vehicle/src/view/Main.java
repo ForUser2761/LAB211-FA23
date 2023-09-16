@@ -21,12 +21,14 @@ public class Main {
                     view.input();
                     break;
                 case 2:
+                    view.checkExistVehicle();
                     break;
                 case 3:
-                    //Delete Vehicle
-                    view.delete();
+                    view.updateVehicle();
                     break;
                 case 4:
+                    //Delete Vehicle
+                    view.delete();
                     break;
                 case 5:
                     searchMenu(view);
@@ -35,6 +37,7 @@ public class Main {
                     displayVehicleMenu(view);
                     break;
                 case 7:
+                    view.saveDataToFile();
                     break;
                 case 8:
                     printVehicleListMenu(view);

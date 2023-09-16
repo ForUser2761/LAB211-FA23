@@ -56,10 +56,42 @@ public class Vehicle {
         return productYear;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setProductYear(int productYear) {
+        this.productYear = productYear;
+    }
+    
+    
+
     @Override
     public String toString() {
-        return "ID: " + id + ", Name: " + name + ", Color: " + color + ", Price: $" + price + ", Brand: " + brand
-                + ", Type: " + type + ", Year: " + productYear;
+        String s = String.format("%-15s | %-15s | %-15s | %-15s | %-15s | %-15s | %-15s |", 
+                id, name, color, price, brand, type, productYear );
+        return s;
+        
     }
 
 }
