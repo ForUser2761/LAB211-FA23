@@ -14,7 +14,7 @@ public class Main {
         ViewVehicle view = new ViewVehicle();
         while (true) {
             displayMenu();
-            int choice = Utility.getInteger("Enter your choice: ", 
+            int choice = Utility.getInteger("Enter your choice: ",
                     "Invalid choice. Please try again.", 1, 9);
             switch (choice) {
                 case 1:
@@ -29,12 +29,15 @@ public class Main {
                 case 4:
                     break;
                 case 5:
+                    searchMenu(view);
                     break;
                 case 6:
+                    displayVehicleMenu(view);
                     break;
                 case 7:
                     break;
                 case 8:
+                    printVehicleListMenu(view);
                     break;
                 case 9:
                     System.exit(0);
@@ -55,7 +58,93 @@ public class Main {
         System.out.println("7. Save Data to File");
         System.out.println("8. Print Vehicle List");
         System.out.println("9. Quit");
-        
+
+    }
+
+    private static void searchMenu(ViewVehicle view) {
+        while (true) {
+            System.out.println("=============================== Search Vehicle ===============================");
+            System.out.println("1. Search vehicle by Name");
+            System.out.println("2. Search vehicle by id");
+            System.out.println("3. Back to previous menu");
+
+            int choice = Utility.getInteger("Enter your choice: ",
+                    "Choice must be number", 1, 3);
+            switch (choice) {
+                case 1:
+                    //search vehicle by name
+                    view.searchByName();
+                    break;
+                case 2:
+                    //search vehicle by id
+                    view.searchById();
+                    break;
+                case 3:
+                    //back to menu
+                    return;
+                default:
+                    System.err.println("Invalid choice. Please choose a valid option.");
+            }
+
+        }
+
+    }
+
+    private static void displayVehicleMenu(ViewVehicle view) {
+        while (true) {
+            System.out.println("=============================== Show Vehicle ===============================");
+            System.out.println("1. Show all vehicles");
+            System.out.println("2. Show all by price");
+            System.out.println("3. Back to previous menu");
+
+            int choice = Utility.getInteger("Enter your choice: ",
+                    "Choice must be number", 1, 3);
+            switch (choice) {
+                case 1:
+                    //Show all vehicles
+                    view.showAllVehicles();
+                    break;
+                case 2:
+                    //Show all by price
+                    view.showAllByPrice();
+
+                    break;
+                case 3:
+                    //back to menu
+                    return;
+                default:
+                    System.err.println("Invalid choice. Please choose a valid option.");
+            }
+
+        }
+    }
+
+    private static void printVehicleListMenu(ViewVehicle view) {
+        while (true) {
+            System.out.println("=============================== Print Vehicle List ===============================");
+            System.out.println("1. Print all vehicles");
+            System.out.println("2. Print all by Year");
+            System.out.println("3. Back to previous menu");
+
+            int choice = Utility.getInteger("Enter your choice: ",
+                    "Choice must be number", 1, 3);
+            switch (choice) {
+                case 1:
+                    //Show all vehicles
+                    view.showAllVehicles();
+                    break;
+                case 2:
+                    //Show all by price
+                    view.printAllVehiclesByYear();
+                    break;
+                case 3:
+                    //back to menu
+                    return;
+                default:
+                    System.err.println("Invalid choice. Please choose a valid option.");
+            }
+
+        }
     }
 
 }

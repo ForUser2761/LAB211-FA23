@@ -1,6 +1,5 @@
 package view;
 
-
 import java.util.Scanner;
 
 
@@ -110,5 +109,47 @@ public class Utility {
                 }
             }
         }
+    }
+
+    public static String inputId() {
+        String id = Utility.getString("Enter Vehicle ID: ",
+                    "Invalid ID format.", "[A-Za-z0-9]+");
+        return id;
+    }
+    
+    public static int inputProductYear() {
+        int productYear = Utility.getInteger("Enter Vehicle Production Year: ",
+                "Invalid year.", 0, 9999);
+        return productYear;
+    }
+    
+    public static String inputType() {
+        String type = Utility.getString("Enter Vehicle Type: ",
+                "Invalid type.", ".+");
+        return type;
+    }
+    
+    public static String inputBrand() {
+        String brand = Utility.getString("Enter Vehicle Brand: ",
+                "Invalid brand.", ".+");
+        return brand;
+    }
+    
+    public static String inputName() {
+        String name = Utility.getString("Enter Vehicle Name: ",
+                "Invalid name.", ".+");
+        return name;
+    }
+
+    public static String inputColor() {
+        String color = Utility.getString("Enter Vehicle Color: ",
+                "Invalid color.", ".+");
+        return color;
+    }
+
+    public static double inputPrice() {
+        double price = Utility.getDouble("Enter Vehicle Price: ",
+                "Invalid price.", 0.0, Double.MAX_VALUE);
+        return price;
     }
 }
