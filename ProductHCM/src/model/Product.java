@@ -10,13 +10,13 @@ package model;
  */
 public class Product {
 
-    private int id;
+    private String id;
     private String name;
     private double unitPrice;
     private int quantity;
-    private String status;
+    private int status;
 
-    public Product(int id, String name, double unitPrice, int quantity, String status) {
+    public Product(String id, String name, double unitPrice, int quantity, int status) {
         this.id = id;
         this.name = name;
         this.unitPrice = unitPrice;
@@ -24,7 +24,7 @@ public class Product {
         this.status = status;
     }
 
-    public int getProductId() {
+    public String getProductId() {
         return id;
     }
 
@@ -52,22 +52,34 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getStatusString() {
+        String result = null;
+        switch (status) {
+            case constant.Constant.STATUS_AVAILABLE:
+                result = "Available";
+                break;
+
+            case constant.Constant.STATUS_NOT_AVAILABLE:
+                result = "Not Available";
+                break;
+            default:
+                throw new AssertionError();
+        }
+        return result;
     }
 
     @Override
     public String toString() {
-        return "Product{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + ", unitPrice=" + unitPrice
-                + ", quantity=" + quantity
-                + ", status='" + status + '\''
-                + '}';
+        String s = String.format("%-15s | %-15s | %-15.2f | %-15d | %-15s",
+                id, name, unitPrice, quantity, getStatusString());
+        return s;
     }
 }

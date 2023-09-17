@@ -24,25 +24,57 @@ public class Main {
             System.out.println("7. Quit");
             System.out.print("Enter your choice: ");
 
-            int choice = Utility.getInteger("", "Invalid input. Please enter a valid choice.", 1, 7);
+            int choice = InputValid.getInteger("", "Invalid input. Please enter a valid choice.", 1, 7);
 
             switch (choice) {
                 case 1:
                     view.createProduct();
                     break;
                 case 2:
+                    view.checkExistProduct();
                     break;
                 case 3:
+                    view.search();
                     break;
                 case 4:
+                    updateProductMenu(view);
                     break;
                 case 5:
+                    view.saveData();
                     break;
                 case 6:
+                    view.printListFromFile();
                     break;
                 case 7:
                     System.exit(0);
             }
+        }
+    }
+
+
+    private static void updateProductMenu(ViewProduct view) {
+        while (true) {
+            System.out.println("=============================== Update Product ===============================");
+            System.out.println("1. ");
+            System.out.println("2. Delete product by id");
+            System.out.println("3. Back to previous menu");
+
+            int choice = InputValid.getInteger("Enter your choice: ",
+                    "Choice must be number", 1, 3);
+            switch (choice) {
+                case 1:
+                    view.updateProduct();
+                    break;
+                case 2:
+                    view.deleteProduct();
+                    break;
+                case 3:
+                    //back to menu
+                    return;
+                default:
+                    System.err.println("Invalid choice. Please choose a valid option.");
+            }
+
         }
     }
 }
