@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /*
@@ -15,7 +17,7 @@ import java.util.Scanner;
  *
  * @author ADMIN
  */
-public class InputValid {
+public class Ultility {
 
     // access modifier + (static) +return type + name method
     public static int getInteger(String message, String error, int min, int max) {
@@ -93,7 +95,7 @@ public class InputValid {
         }
     }
 
-    public static String getString(String message, String error, String regex) {
+    public static String getString(String message, String regex, String error ) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.print(message);
@@ -126,16 +128,42 @@ public class InputValid {
             if (input.matches(regex)) {
                 //check input date exist ?
                 if (isDateExist(input)) {
+                    //check date before current date
                     try {
-                        return dateFormat.parse(input);
-                    } catch (ParseException ex) {
+                        if (checkOldEnough(input)) {
+                            return dateFormat.parse(input);
+                        }else {
+                            System.out.println("You must enough " + Constant.OLD_ENOUGH);
+                        }
+                    }catch (Exception ex) {
+
                     }
+
+
                 } else {
                     System.err.println("Date not exist !!");
                 }
             } else {
                 System.err.println(error);
             }
+        }
+    }
+
+    public static boolean checkOldEnough(String input) {
+
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat(Constant.FORMAT_DATE);
+            Date currentDate = new Date();
+            Date inputDate = dateFormat.parse(input);
+            long result = (currentDate.getTime() - inputDate.getTime()) / (60 * 60 * 24 * 365l * 1000);
+            if(result >= Constant.OLD_ENOUGH) {
+                return  true;
+            }else {
+                return false;
+            }
+
+        } catch (ParseException ex) {
+            return false;
         }
     }
 
@@ -150,55 +178,5 @@ public class InputValid {
             //parse failed => date not exist => return false
             return false;
         }
-    }
-
-    public static String inputCode() {
-        String code = InputValid.getString("Enter product code: ",
-                "Invalid product code format.", "[A-Za-z0-9]+");
-        return code;
-    }
-
-    public static String inputName() {
-        String name = InputValid.getString("Enter product name: ",
-                "Invalid product name format.", "[A-Za-z0-9\\s]+");
-        return name;
-    }
-
-    public static double inputPrice() {
-        double price = InputValid.getDouble("Enter product price: ",
-                "Invalid price. Please enter a valid number.", 0, Double.MAX_VALUE);
-        return price;
-    }
-
-    public static int inputQuantity() {
-        int quantity = InputValid.getInteger("Enter product quantity: ",
-                "Invalid quantity. Please enter a valid number.", 0, Integer.MAX_VALUE);
-        return quantity;
-    }
-
-    public static Date inputManufacturingDate() {
-        Date manufacturingDate = InputValid.inputDateWithFormat("Enter manufacturing date (dd/MM/yyyy): ",
-                "Invalid date format.", "\\d{2}/\\d{2}/\\d{4}");
-        return manufacturingDate;
-    }
-
-    public static Date inputExpirationDate(Date manufacturingDate) {
-        while (true) {
-            Date expirationDate = InputValid.inputDateWithFormat("Enter expiration date (dd/MM/yyyy): ",
-                    "Invalid date format.", "\\d{2}/\\d{2}/\\d{4}");
-            if (!expirationDate.before(manufacturingDate)) {
-                return expirationDate;
-            }else {
-                System.err.println("Expiration date must be greater than or equal to manufacturing date.");
-                
-            }
-        }
-    }
-
-    public static int inputType() {
-        int type = getInteger("Enter type of product (1: daily life | "
-                + "2: long shelf life): ",
-                "Must be 1 or 2", 1, 2);
-        return type;
     }
 }
