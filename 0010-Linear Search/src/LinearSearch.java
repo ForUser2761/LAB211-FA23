@@ -1,4 +1,6 @@
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /*
@@ -36,25 +38,32 @@ class LinearSearch {
 
     static void displayIndexOfSearchNumber(int[] array, int searchValue) {
         //search
-        int index = getIndexByLinearSearch(array, searchValue);
+        List<Integer> listIndex = getIndexByLinearSearch(array, searchValue);
         //display
-        if (index != -1) {
-            System.out.println("Found " + searchValue + " at index: " + index);
+        if (listIndex != null) {
+            System.out.print("Found " + searchValue + " at index: " );
+            System.out.println(listIndex);
         }else {
             System.out.println("Not found");
         }
     }
 
-    private static int getIndexByLinearSearch(int[] array, int searchValue) {
+    private static List<Integer> getIndexByLinearSearch(int[] array, int searchValue) {
+        List<Integer> list = new ArrayList<>();
         for (int i = 0; i < array.length; i++) {
             //check search value equal element
             if (searchValue == array[i]) {
                 //found : return index
-                return i;
+                list.add(i);
             }
         }
-        //not found
-        return -1;
+        //neu nhu tim thay
+        if (!list.isEmpty()) {
+            return list;
+        }else {
+            //not found
+            return  null;
+        }
     }
     
 }

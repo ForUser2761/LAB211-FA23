@@ -15,16 +15,16 @@ public class Main {
         //enter size of array
         int sizeOfArray = getInteger("Enter size of array: ",
                 "Size of array must be integer number", 1, Integer.MAX_VALUE);
-        int searchValue = getInteger("Enter search number: ",
-                "Search value must be integer number", 
-                Integer.MIN_VALUE,
-                Integer.MAX_VALUE);
         //Declaring array
         int[] array = new int[sizeOfArray];
         //Generate random integer in number range for each array element
         LinearSearch.generateRandomNumberInRange(array);
         //Display array before 
         LinearSearch.displayArray(array, "The array: ");
+        int searchValue = getInteger("Enter search number: ",
+                "Search value must be integer number", 
+                Integer.MIN_VALUE,
+                Integer.MAX_VALUE);
         //Display the index of search number in array
         LinearSearch.displayIndexOfSearchNumber(array, searchValue);
     }
