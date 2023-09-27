@@ -16,7 +16,7 @@ public enum Car {
     AUDI, MERCEDES, BMW;
 
     static Car inputCar(String message) {
-        String car = Input.getString(message);
+        String car = Input.getString(message).toUpperCase();
         return getCar(car);
     }
 
@@ -30,7 +30,7 @@ public enum Car {
             case BMW:
                 return Arrays.asList(2500, 3000, 3500);
             default:
-                return Collections.emptyList();
+                return null;
         }
     }
 
@@ -38,13 +38,13 @@ public enum Car {
     public List<Color> getColors() {
         switch (this) {
             case AUDI:
-                return Arrays.asList(Color.WHITE, Color.YELLOW, Color.ORANGE);
+                return Arrays.asList(Color.WHITE, Color.YELLOW, Color.ORANGE, Color.NO_COLOR);
             case MERCEDES:
-                return Arrays.asList(Color.GREEN, Color.BLUE, Color.PURPLE);
+                return Arrays.asList(Color.GREEN, Color.BLUE, Color.PURPLE, Color.NO_COLOR);
             case BMW:
-                return Arrays.asList(Color.PINK, Color.RED, Color.BROWN);
+                return Arrays.asList(Color.PINK, Color.RED, Color.BROWN, Color.NO_COLOR);
             default:
-                return Collections.emptyList();
+                return null;
         }
     }
 
@@ -58,7 +58,7 @@ public enum Car {
             case BMW:
                 return Arrays.asList(Day.MONDAY, Day.SUNDAY, Day.THURSDAY);
             default:
-                return Collections.emptyList();
+                return null;
         }
     }
     
