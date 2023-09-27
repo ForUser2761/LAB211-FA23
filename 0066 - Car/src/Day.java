@@ -20,7 +20,7 @@ public enum Day {
     }
 
     static Day inputDay(String price_) {
-        String day = Input.getString(price_);
+        String day = Input.getString(price_).toUpperCase();
         return getDay(day);
     }
 }
