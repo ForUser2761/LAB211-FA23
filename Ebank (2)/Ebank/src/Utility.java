@@ -1,17 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package util;
 
-/**
- *
- * @author ADMIN
- */
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -25,10 +19,10 @@ public class Utility {
 
     static Scanner scanner = new Scanner(System.in);
     static final String REGEX_DATE = "\\d{2}[-]\\d{2}[-]\\d{4}";
-    public static final String REGEX_STRING = "[a-zA-Z0-9 ]+";
+    static final String REGEX_STRING = "[a-zA-Z0-9 ]+";
 
-    public static int getInt(String message, String firstError,
-            String secondError, String thirdError, int min, int max) {
+    public static int getInt(String message, String firstError
+            , int min, int max) {
         //Exception : dai dien cho moi loai loi ... 
         //tioen doan duoc cai loi la se xay ra loi nao
         while (true) {
@@ -36,14 +30,14 @@ public class Utility {
                 System.out.print(message);
                 int number = Integer.parseInt(scanner.nextLine());
                 if (number < min) {
-                    System.out.println(firstError);
+                    System.out.println("Wrong");
                 } else if (number > max) {
-                    System.out.println(secondError);
+                    System.out.println("Wrong");
                 } else {
                     return number;
                 }
             } catch (Exception e) {
-                System.out.println(thirdError);
+                System.out.println(firstError);
             }
         }
     }
@@ -98,22 +92,17 @@ public class Utility {
         }
     }
 
-    public static String getString(String message, String error, String regex) {
+    public static String getString(String message) {
         while (true) {
             System.out.print(message);
             String input = scanner.nextLine().trim();
-
-            if (input.matches(regex)) {
-                return input;
-            } else {
-                System.out.println(error);
-            }
+            return input;
         }
 
     }
 
     public static String getDate(String messageString, String firstError,
-            String secondError) {
+            String secondError, String thirdError) {
 
         while (true) {
 
@@ -126,14 +115,17 @@ public class Utility {
             } //check date exist
             else if (checkDateExist(dateInput, dateFormat) == false) {
                 System.out.println(secondError);
-            } else {
+            }//check date greater or equal to current date
+            else if (checkDateGreaterThanCurrentDate(dateInput, dateFormat) == false) {
+                System.out.println(thirdError);
+            }else {
                 return dateInput;
             }
         }
     }
 
-    private static boolean checkDateExist(String dateInput,
-            SimpleDateFormat dateFormat) {
+    private static boolean checkDateExist(String dateInput, SimpleDateFormat dateFormat
+    ) {
         dateFormat.setLenient(false);
 
         try {
@@ -143,5 +135,27 @@ public class Utility {
             return false;
         }
 
+    }
+
+    private static boolean checkDateGreaterThanCurrentDate(String dateInput, SimpleDateFormat dateFormat) {
+        
+        try {
+            Date currentDate = new Date();
+            String current =  dateFormat.format(currentDate);
+            currentDate = dateFormat.parse(current);
+            
+            Date inputDate = dateFormat.parse(dateInput);
+            
+            if (inputDate.before(currentDate)) {
+                return false;
+            }else {
+                return true;
+            }
+            
+        } catch (ParseException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+        
     }
 }
